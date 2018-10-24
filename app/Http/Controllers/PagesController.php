@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Requests\CreateMessageRequest;
+use App\Message;
+use DB;
 
 
 class PagesController extends Controller
@@ -20,6 +22,7 @@ class PagesController extends Controller
     }
 
     public function saludo($nombre = "Invitado"){
+        
     	return view('saludo', compact('nombre'));
     }
 

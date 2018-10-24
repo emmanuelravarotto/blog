@@ -16,6 +16,11 @@ class MessagesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    function __construct(){
+        $this->middleware('auth',['except'=>['create','store']]);
+    }
+
     public function index()
     {
 
@@ -62,7 +67,7 @@ class MessagesController extends Controller
        Message::create($request->all());
 
 
-       return redirect()->route('mensajes.index');
+       return redirect()->route('mensajes.create')->with('info','Hemos recibido tu mensaje');
     }
 
     /**

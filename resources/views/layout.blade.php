@@ -18,7 +18,7 @@
 	?>
 
 	<nav class="navbar navbar-default" role="navigation">
-		<div class="container-fluid">
+		<div class="container">
 			<!-- Brand and toggle get grouped for better mobile display -->
 			<div class="navbar-header">
 				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
@@ -36,40 +36,49 @@
 					<li class="{{ activeMenu('/') }}"><a  href="{{route('home')}}">Inicio</a></li>
 					<li class="{{ activeMenu('saludo/*') }}"><a  href="{{ route('saludo') }}">Saludar</a></li>
 					<li class="{{ activeMenu('mensajes/create') }}"><a  href="{{ route('mensajes.create')}}">Contacto</a></li>
-					<li class="{{ activeMenu('mensajes') }}"><a  href="{{ route('mensajes.index')}}">Mensajes</a></li>
-				
+					@if(Auth::check())
+						<li class="{{ activeMenu('mensajes') }}"><a  href="{{ route('mensajes.index')}}">Mensajes</a></li>
+						@if(Auth::user()->hasRoles(['admin','estudiante']))
+						<li class="{{ activeMenu('usuarios*') }}"><a  href="{{ route('usuarios.index')}}">Usuarios</a></li>
+						@endif
+					@endif
 				</ul>
-				<form class="navbar-form navbar-left" role="search">
-					<div class="form-group">
-						<input type="text" class="form-control" placeholder="Search">
-					</div>
-					<button type="submit" class="btn btn-default">Submit</button>
-				</form>
+				
 				<ul class="nav navbar-nav navbar-right">
-					<li><a href="#">Link</a></li>
+					@guest
+                        <li><a href="{{ route('login') }}">Login</a></li>
+					@else
 					<li class="dropdown">
-						<a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown">{{ Auth::user()->name }} <b class="caret"></b></a>
 						<ul class="dropdown-menu">
-							<li><a href="#">Action</a></li>
-							<li><a href="#">Another action</a></li>
-							<li><a href="#">Something else here</a></li>
-							<li><a href="#">Separated link</a></li>
+							<li>
+								<a href="{{ route('logout') }}"
+                                     onclick="event.preventDefault();
+                       		            document.getElementById('logout-form').submit();">
+                                            Logout
+                                </a>
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                            {{ csrf_field() }}
+                                </form>
+                               </li>
 						</ul>
 					</li>
+					@endguest
 				</ul>
 			</div><!-- /.navbar-collapse -->
 		</div>
 	</nav>
 
+	<div class="container">
+		@yield('contenido')
 
-	<header>
-		<nav>
-			
-		</nav>
-	</header>
+		<footer>Copyright° {{ date('Y') }} </footer>
+	</div>
 
-	@yield('contenido')
-
-	<footer>Copyright° {{ date('Y') }} </footer>
+	<script
+  src="https://code.jquery.com/jquery-3.3.1.min.js"
+  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+  crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
 </body>
 </html>

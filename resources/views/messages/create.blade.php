@@ -11,7 +11,7 @@
 		{!! csrf_field() !!}
 		<label for="nombre">
 			Nombre
-			<input type="text" name="nombre" value="{{ old('nombre') }}" required>
+			<input class="form-control" type="text" name="nombre" value="{{ old('nombre') }}" required>
 			<p class="error">{{ $errors->first('nombre') }}</p>
 			
 		</label>
@@ -19,7 +19,7 @@
 		<br>
 		<label for="email">
 			Email
-			<input type="email" name="email" value="{{ old('email') }}">
+			<input class="form-control" type="email" name="email" value="{{ old('email') }}">
 			<p class="error">{{ $errors->first('email') }}</p>
 			
 		</label>
@@ -27,13 +27,13 @@
 		<br>
 		<label for="mensaje">
 			Mensaje
-			<textarea name="mensaje" value="{{ old('mensaje') }}"></textarea>
+			<textarea class="form-control" name="mensaje" value="{{ old('mensaje') }}"></textarea>
 			<p class="error">{{ $errors->first('mensaje') }}</p>
 			
 		</label>
 		<br>
 		<br>
-		<input type="submit" value="Enviar">
+		<input class="btn btn-success" type="submit" value="Enviar">
 	</form>
 	@endif
 
