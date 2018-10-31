@@ -39,7 +39,8 @@
 					<li class="{{ activeMenu('mensajes/create') }}"><a  href="{{ route('mensajes.create')}}">Contacto</a></li>
 					@if(Auth::check())
 						<li class="{{ activeMenu('mensajes') }}"><a  href="{{ route('mensajes.index')}}">Mensajes</a></li>
-						@if(Auth::user()->hasRoles(['admin','estudiante']))
+						@if(Auth::user()->hasRoles(['admin']))
+						
 						<li class="{{ activeMenu('usuarios*') }}"><a  href="{{ route('usuarios.index')}}">Usuarios</a></li>
 						@endif
 					@endif
@@ -61,6 +62,9 @@
                                 <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                             {{ csrf_field() }}
                                 </form>
+                               </li>
+                               <li>
+                               	<a href="usuarios/{{ Auth::user()->id }}/edit">Mi cuenta</a>
                                </li>
 						</ul>
 					</li>

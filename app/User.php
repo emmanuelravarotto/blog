@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Assigned_role;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
@@ -32,6 +33,7 @@ class User extends Authenticatable
 
 
     public function roles(){
+
         return $this->belongsToMany(Role::class,'assigned_roles');
     }
 
@@ -49,5 +51,31 @@ class User extends Authenticatable
         }
 
         return false;
+    }
+    public function tieneRole($id){
+        
+        $roles = Assigned_role::all();
+        /*
+        foreach( $roles as $role ) {
+           /* if($role->user_id === $id){
+                return true;
+            }
+           
+            
+        }
+        */
+         $user = R::find($id);
+         $user = User::all()->first();
+            if($user )
+        
+
+        return false;
+
+      /* if($role->user_id === $ind){
+            return true;
+       }
+       return false;
+       */     
+        
     }
 }

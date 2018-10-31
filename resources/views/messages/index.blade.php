@@ -3,7 +3,7 @@
 @section('contenido')
 
 	<h1>ALL MASSAGES</h1>
-
+	
 	<table class="table">
 		<thead>
 			<tr>
@@ -12,7 +12,6 @@
 				<th>Email</th>
 				<th>Mensajes</th>
 				<th>Acciones</th>
-
 			</tr>
 		</thead>
 		<tbody>
